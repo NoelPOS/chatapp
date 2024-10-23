@@ -1,15 +1,19 @@
+import React from 'react'
 import Conversations from './Conversations'
 import LogoutButton from './LogoutButton'
 import SearchInput from './SearchInput'
 
 const Sidebar = () => {
   return (
-    <div className='border-r border-slate-500 p-4 flex flex-col'>
-      <SearchInput />
-      <div className='divider px-3'></div>
-      <Conversations />
-      <LogoutButton />
+    <div className='w-80 bg-gray-800 border-r border-gray-700 flex flex-col h-full'>
+      <div className='p-4'>
+        <SearchInput />
+      </div>
+      <div className='flex-grow overflow-y-auto'>
+        <Conversations />
+      </div>
     </div>
   )
 }
+
 export default Sidebar

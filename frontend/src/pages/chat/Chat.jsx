@@ -4,66 +4,51 @@ import MessageContainer from '../../components/messages/MessageContainer'
 
 const Chat = () => {
   return (
-    <div className='drawer'>
-      <input id='my-drawer-3' type='checkbox' className='drawer-toggle' />
-      <div className='drawer-content flex flex-col'>
-        {/* Navbar */}
-        <div className='navbar bg-base-300 w-full'>
-          <div className='flex-none lg:hidden'>
-            <label
-              htmlFor='my-drawer-3'
-              aria-label='open sidebar'
-              className='btn btn-square btn-ghost'
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                className='inline-block h-6 w-6 stroke-current'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d='M4 6h16M4 12h16M4 18h16'
-                ></path>
-              </svg>
-            </label>
+    <div className='h-screen flex flex-col bg-gradient-to-br from-gray-800 to-gray-900'>
+      <div className='flex-none'>
+        <div className='bg-gray-800 text-white shadow-md'>
+          <div className='container mx-auto px-4'>
+            <div className='flex items-center justify-between h-16'>
+              <div className='flex items-center'>
+                <button
+                  className='lg:hidden mr-2 text-gray-300 hover:text-white focus:outline-none focus:text-white'
+                  aria-label='Open sidebar'
+                >
+                  <svg className='h-6 w-6 fill-current' viewBox='0 0 24 24'>
+                    <path
+                      d='M4 6h16M4 12h16M4 18h16'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                    />
+                  </svg>
+                </button>
+                <span className='font-bold text-xl'>Chat App</span>
+              </div>
+              <nav className='hidden lg:flex space-x-4'>
+                <a
+                  href='/'
+                  className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+                >
+                  Home
+                </a>
+                <a
+                  href='#'
+                  className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+                >
+                  Logout
+                </a>
+              </nav>
+            </div>
           </div>
-          <div className='mx-2 flex-1 px-2'>Chat App</div>
-          <div className='hidden flex-none lg:block'>
-            <ul className='menu menu-horizontal'>
-              {/* Navbar menu content here */}
-              <li>
-                <a href='/'>Home</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        {/* Page content here sm:h-[450px] md:h-[550px]*/}
-        <div className='flex  rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-          <Sidebar />
-          <MessageContainer />
         </div>
       </div>
-      <div className='drawer-side'>
-        <label
-          htmlFor='my-drawer-3'
-          aria-label='close sidebar'
-          className='drawer-overlay'
-        ></label>
-        <ul className='menu bg-base-200 min-h-full w-80 p-4'>
-          {/* Sidebar content here */}
-          <li>
-            <a href='/'>Home</a>
-          </li>
-          <li>
-            <a>Logout</a>
-          </li>
-        </ul>
+      <div className='flex-grow flex overflow-hidden'>
+        <Sidebar />
+        <main className='flex-grow bg-gray-700 overflow-hidden'>
+          <MessageContainer />
+        </main>
       </div>
     </div>
   )

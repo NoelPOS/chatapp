@@ -1,8 +1,9 @@
+import React from 'react'
 import Conversation from './Conversation'
 
 const Conversations = () => {
   return (
-    <div className='py-2 flex flex-col overflow-auto'>
+    <div className='flex flex-col'>
       <Conversation />
       <Conversation />
       <Conversation />
@@ -12,4 +13,5 @@ const Conversations = () => {
     </div>
   )
 }
+
 export default Conversations

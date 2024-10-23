@@ -2,27 +2,20 @@ import React from 'react'
 
 const Message = () => {
   return (
-    <div className={`chat chat-end`}>
-      <div className='chat-image avatar'>
-        <div className='w-10 rounded-full'>
-          {/* src={profilePic} */}
-          <img
-            alt='Tailwind CSS chat bubble component'
-            src='https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
-          />
+    <div className='flex flex-col items-end mb-4'>
+      <div className='flex items-end'>
+        <div className='order-2 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs'>
+          <div className='inline-block rounded-lg rounded-br-none bg-blue-500 px-4 py-2 text-white'>
+            Hello world
+          </div>
         </div>
+        <img
+          src='https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
+          alt='User avatar'
+          className='h-6 w-6 rounded-full order-1'
+        />
       </div>
-      <div
-        //   ${bubbleBgColor} ${shakeClass}
-        className={`chat-bubble text-white pb-2`}
-      >
-        {/* {message.message} */}
-        Hello world
-      </div>
-      <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>
-        {/* {formattedTime} */}
-        12:00 PM
-      </div>
+      <span className='text-xs text-gray-500 leading-none mt-1'>12:00 PM</span>
     </div>
   )
 }
