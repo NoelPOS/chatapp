@@ -4,7 +4,8 @@ import Messages from './Messages'
 
 const MessageContainer = () => {
   return (
-    <div className='md:min-w-[450px] flex flex-col'>
+    // md:min-w-[450px]
+    <div className='flex-1 flex flex-col h-[92vh]'>
       <>
         {/* Header */}
         <div className='bg-slate-500 px-4 py-2 mb-2'>

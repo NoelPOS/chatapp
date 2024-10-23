@@ -33,7 +33,7 @@ const Home = () => {
             <ul className='menu menu-horizontal'>
               {/* Navbar menu content here */}
               <li>
-                <a>Home</a>
+                <a href='/chat'>Chat</a>
               </li>
               <li>
                 <a>Logout</a>
@@ -72,7 +72,7 @@ const Home = () => {
         <ul className='menu bg-base-200 min-h-full w-80 p-4'>
           {/* Sidebar content here */}
           <li>
-            <a>Home</a>
+            <a htef='/chat'>Chat</a>
           </li>
           <li>
             <a>Logout</a>

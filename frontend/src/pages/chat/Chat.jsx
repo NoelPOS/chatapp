@@ -35,7 +35,7 @@ const Chat = () => {
             <ul className='menu menu-horizontal'>
               {/* Navbar menu content here */}
               <li>
-                <a>Home</a>
+                <a href='/'>Home</a>
               </li>
               <li>
                 <a>Logout</a>
@@ -43,8 +43,8 @@ const Chat = () => {
             </ul>
           </div>
         </div>
-        {/* Page content here */}
-        <div className='flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+        {/* Page content here sm:h-[450px] md:h-[550px]*/}
+        <div className='flex  rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
           <Sidebar />
           <MessageContainer />
         </div>
@@ -58,7 +58,7 @@ const Chat = () => {
         <ul className='menu bg-base-200 min-h-full w-80 p-4'>
           {/* Sidebar content here */}
           <li>
-            <a>Home</a>
+            <a href='/'>Home</a>
           </li>
           <li>
             <a>Logout</a>

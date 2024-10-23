@@ -2,7 +2,7 @@ import React from 'react'
 
 const Message = () => {
   return (
-    <div className={`chat start`}>
+    <div className={`chat chat-end`}>
       <div className='chat-image avatar'>
         <div className='w-10 rounded-full'>
           {/* src={profilePic} */}
