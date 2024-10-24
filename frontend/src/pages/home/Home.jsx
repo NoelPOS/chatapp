@@ -1,6 +1,13 @@
 import React from 'react'
+import useLogout from '../../hooks/useLogout.js'
 
 const Home = () => {
+  const { loading, logout } = useLogout()
+
+  const handleLogout = (e) => {
+    e.preventDefault()
+    logout()
+  }
   return (
     <div className='drawer'>
       <input id='my-drawer-3' type='checkbox' className='drawer-toggle' />
@@ -36,7 +43,7 @@ const Home = () => {
                 <a href='/chat'>Chat</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a onClick={handleLogout}>Logout</a>
               </li>
             </ul>
           </div>
@@ -75,7 +82,7 @@ const Home = () => {
             <a htef='/chat'>Chat</a>
           </li>
           <li>
-            <a>Logout</a>
+            <a onClick={handleLogout}>Logout</a>
           </li>
         </ul>
       </div>

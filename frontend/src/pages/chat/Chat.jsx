@@ -1,8 +1,15 @@
 import React from 'react'
 import Sidebar from '../../components/sidebars/Sidebar'
 import MessageContainer from '../../components/messages/MessageContainer'
+import useLogout from '../../hooks/useLogout.js'
 
 const Chat = () => {
+  const { loading, logout } = useLogout()
+
+  const handleLogout = (e) => {
+    e.preventDefault()
+    logout()
+  }
   return (
     <div className='h-screen flex flex-col bg-gradient-to-br from-gray-800 to-gray-900'>
       <div className='flex-none'>
@@ -36,6 +43,7 @@ const Chat = () => {
                 <a
                   href='#'
                   className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+                  onClick={handleLogout}
                 >
                   Logout
                 </a>
