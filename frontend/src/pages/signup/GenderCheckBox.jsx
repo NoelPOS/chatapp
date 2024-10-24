@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 
-const GenderCheckbox = () => {
-  const [selectedGender, setSelectedGender] = useState('')
-
+const GenderCheckbox = ({ handleGenderInput, selectedGender }) => {
   return (
     <div className='flex flex-col space-y-2'>
       <label className='block text-sm font-medium text-gray-300 mb-2'>
@@ -16,7 +14,7 @@ const GenderCheckbox = () => {
             name='gender'
             value='male'
             checked={selectedGender === 'male'}
-            onChange={() => setSelectedGender('male')}
+            onChange={() => handleGenderInput('male')}
           />
           <span className='ml-2 text-gray-300'>Male</span>
         </label>
@@ -27,7 +25,7 @@ const GenderCheckbox = () => {
             name='gender'
             value='female'
             checked={selectedGender === 'female'}
-            onChange={() => setSelectedGender('female')}
+            onChange={() => handleGenderInput('female')}
           />
           <span className='ml-2 text-gray-300'>Female</span>
         </label>

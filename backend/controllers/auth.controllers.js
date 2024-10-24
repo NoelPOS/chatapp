@@ -4,48 +4,52 @@ import bcrypt from 'bcryptjs'
 import generateTokenandCookie from '../utils/generateToken.js'
 
 export const signup = async (req, res) => {
-  const { fullname, username, password, confirmpassword, gender, profilePic } =
-    req.body
+  try {
+    const { fullname, username, password, confirmpassword, gender } = req.body
 
-  if (password !== confirmpassword) {
-    return res.status(400).json({ message: 'Passwords do not match' })
-  }
+    if (password !== confirmpassword) {
+      return res.status(400).json({ message: 'Passwords do not match' })
+    }
 
-  const user = await User.findOne({ username })
+    const user = await User.findOne({ username })
 
-  if (user) {
-    return res.status(400).json({ message: 'User already exists' })
-  }
+    if (user) {
+      return res.status(400).json({ message: 'User already exists' })
+    }
 
-  // Hash password
+    // Hash password
 
-  const salt = await bcrypt.genSalt(10)
-  const hashedPassword = await bcrypt.hash(password, salt)
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
 
-  // Profile pic
+    // Profile pic
+    let profilePic = ''
+    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`
+    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
 
-  const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`
-  const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
-
-  const newUser = new User({
-    fullname,
-    username,
-    password: hashedPassword,
-    gender,
-    profilePic: gender === 'male' ? boyProfilePic : girlProfilePic,
-  })
-
-  if (newUser) {
-    generateTokenandCookie(newUser._id, res)
-    await newUser.save()
-    return res.status(201).json({
-      _id: newUser._id,
-      fullname: newUser.fullname,
-      username: newUser.username,
-      profilePic,
+    const newUser = new User({
+      fullname,
+      username,
+      password: hashedPassword,
+      gender,
+      profilePic: gender === 'male' ? boyProfilePic : girlProfilePic,
     })
-  } else {
-    return res.status(400).json({ error: 'Invalid user data' })
+
+    if (newUser) {
+      generateTokenandCookie(newUser._id, res)
+      await newUser.save()
+      return res.status(201).json({
+        _id: newUser._id,
+        fullname: newUser.fullname,
+        username: newUser.username,
+        profilePic,
+      })
+    } else {
+      return res.status(400).json({ error: 'Invalid user data' })
+    }
+  } catch (error) {
+    console.log('Error in signup controller', error.message)
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
 

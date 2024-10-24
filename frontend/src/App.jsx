@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route
+        <Route
           path='/'
           element={authUser ? <Home /> : <Navigate to={'/login'} />}
         />
@@ -23,11 +23,7 @@ function App() {
         <Route
           path='/signup'
           element={authUser ? <Navigate to='/' /> : <SignUp />}
-        /> */}
-        <Route path='/' element={<Home />} />
-        <Route path='/chat' element={<Chat />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<SignUp />} />
+        />
       </Routes>
       <Toaster />
     </>

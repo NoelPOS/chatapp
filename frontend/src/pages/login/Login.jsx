@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
+import useLogin from '../../hooks/useLogin'
 
 const Login = () => {
+  const { login, loading } = useLogin()
+  const [inputs, setInputs] = useState({ username: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    login(inputs.username, inputs.password)
+  }
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900 p-4'>
@@ -10,7 +18,7 @@ const Login = () => {
           Login to <span className='text-blue-400'>ChatApp</span>
         </h1>
 
-        <form className='space-y-6'>
+        <form className='space-y-6' onSubmit={handleSubmit}>
           <div>
             <label
               className='block text-sm font-medium text-gray-300 mb-2'
@@ -23,6 +31,9 @@ const Login = () => {
               type='text'
               placeholder='Enter username'
               className='w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200'
+              onChange={(e) =>
+                setInputs({ ...inputs, username: e.target.value })
+              }
             />
           </div>
 
@@ -39,6 +50,9 @@ const Login = () => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Enter Password'
                 className='w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200'
+                onChange={(e) =>
+                  setInputs({ ...inputs, password: e.target.value })
+                }
               />
               <button
                 type='button'
@@ -79,14 +93,17 @@ const Login = () => {
           </div>
 
           <a
-            href='#'
+            href='/signup'
             className='text-sm text-blue-400 hover:underline hover:text-blue-300 transition duration-200 inline-block'
           >
             Don't have an account?
           </a>
 
           <div>
-            <button className='w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200'>
+            <button
+              className='w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200'
+              type='submit'
+            >
               Login
             </button>
           </div>

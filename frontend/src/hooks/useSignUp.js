@@ -7,31 +7,31 @@ const useSignup = () => {
   const { setAuthUser } = useAuthContext()
 
   const signup = async ({
-    fullName,
+    fullname,
     username,
     password,
-    confirmPassword,
+    confirmpassword,
     gender,
   }) => {
     const success = handleInputErrors({
-      fullName,
+      fullname,
       username,
       password,
-      confirmPassword,
+      confirmpassword,
       gender,
     })
     if (!success) return
 
     setLoading(true)
     try {
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch(`http://localhost:5000/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          fullName,
+          fullname,
           username,
           password,
-          confirmPassword,
+          confirmpassword,
           gender,
         }),
       })
@@ -54,18 +54,18 @@ const useSignup = () => {
 export default useSignup
 
 function handleInputErrors({
-  fullName,
+  fullname,
   username,
   password,
-  confirmPassword,
+  confirmpassword,
   gender,
 }) {
-  if (!fullName || !username || !password || !confirmPassword || !gender) {
+  if (!fullname || !username || !password || !confirmpassword || !gender) {
     toast.error('Please fill in all fields')
     return false
   }
 
-  if (password !== confirmPassword) {
+  if (password !== confirmpassword) {
     toast.error('Passwords do not match')
     return false
   }

@@ -1,7 +1,27 @@
 import React, { useState } from 'react'
 import GenderCheckbox from './GenderCheckBox'
+import useSignup from '../../hooks/useSignUp'
 
 const SignUp = () => {
+  const [inputs, setInputs] = useState({
+    fullname: '',
+    username: '',
+    password: '',
+    confirmpassword: '',
+    gender: '',
+  })
+
+  const handleGenderInput = (gender) => {
+    setInputs({ ...inputs, gender: gender })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // console.log(inputs)
+    await signup(inputs)
+  }
+  const { loading, signup } = useSignup()
+
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
@@ -12,7 +32,7 @@ const SignUp = () => {
           Sign Up <span className='text-blue-400'>ChatApp</span>
         </h1>
 
-        <form className='space-y-6'>
+        <form className='space-y-6' onSubmit={handleSubmit}>
           <div>
             <label
               className='block text-sm font-medium text-gray-300 mb-2'
@@ -25,6 +45,9 @@ const SignUp = () => {
               type='text'
               placeholder='John Doe'
               className='w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200'
+              onChange={(e) => {
+                setInputs({ ...inputs, fullname: e.target.value })
+              }}
             />
           </div>
 
@@ -40,6 +63,9 @@ const SignUp = () => {
               type='text'
               placeholder='johndoe'
               className='w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200'
+              onChange={(e) => {
+                setInputs({ ...inputs, username: e.target.value })
+              }}
             />
           </div>
 
@@ -56,6 +82,9 @@ const SignUp = () => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Enter Password'
                 className='w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200'
+                onChange={(e) => {
+                  setInputs({ ...inputs, password: e.target.value })
+                }}
               />
               <button
                 type='button'
@@ -108,6 +137,9 @@ const SignUp = () => {
                 type={showConfirmPassword ? 'text' : 'password'}
                 placeholder='Confirm Password'
                 className='w-full px-4 py-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200'
+                onChange={(e) => {
+                  setInputs({ ...inputs, confirmpassword: e.target.value })
+                }}
               />
               <button
                 type='button'
@@ -147,18 +179,28 @@ const SignUp = () => {
             </div>
           </div>
 
-          <GenderCheckbox />
+          <GenderCheckbox
+            handleGenderInput={handleGenderInput}
+            selectedGender={inputs.gender}
+          />
 
           <a
-            href='#'
+            href='/login'
             className='text-sm text-blue-400 hover:underline hover:text-blue-300 transition duration-200 inline-block'
           >
             Already have an account?
           </a>
 
           <div>
-            <button className='w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200'>
-              Sign Up
+            <button
+              className='w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200'
+              type='submit'
+            >
+              {loading ? (
+                <span className='loading loading-spinner'></span>
+              ) : (
+                'Sign Up'
+              )}
             </button>
           </div>
         </form>
