@@ -18,11 +18,11 @@ function App() {
         />
         <Route
           path='/login'
-          element={authUser ? <Navigate to='/chat' /> : <Login />}
+          element={authUser ? <Navigate to='/' /> : <Login />}
         />
         <Route
           path='/signup'
-          element={authUser ? <Navigate to='/chat' /> : <SignUp />}
+          element={authUser ? <Navigate to='/' /> : <SignUp />}
         />
         <Route
           path='/chat'

@@ -1,6 +1,6 @@
 import React from 'react'
 import Conversation from './Conversation'
-import { useGetConversations } from '../../hooks/useGetConversations'
+import useGetConversations from '../../hooks/useGetConversations'
 
 const Conversations = () => {
   const { loading, conversations } = useGetConversations()
@@ -16,3 +16,5 @@ const Conversations = () => {
     </div>
   )
 }
+
+export default Conversations

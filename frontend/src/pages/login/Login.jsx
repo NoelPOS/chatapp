@@ -6,9 +6,9 @@ const Login = () => {
   const [inputs, setInputs] = useState({ username: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    login(inputs.username, inputs.password)
+    await login(inputs.username, inputs.password)
   }
 
   return (
