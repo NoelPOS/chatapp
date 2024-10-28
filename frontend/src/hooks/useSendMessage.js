@@ -6,7 +6,7 @@ const useSendMessage = () => {
   const [loading, setLoading] = useState(false)
   const { messages, setMessages, selectedConversation } = useConversation()
 
-  const sendMessage = async (message) => {
+  const sendMessage = async (message, id) => {
     setLoading(true)
     try {
       const response = await fetch(
@@ -16,7 +16,8 @@ const useSendMessage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ message }),
+
+          body: JSON.stringify({ message, id }),
         }
       )
       const data = await response.json()

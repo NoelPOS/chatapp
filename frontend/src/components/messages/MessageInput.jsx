@@ -2,15 +2,19 @@ import React, { useState } from 'react'
 import { BsSend } from 'react-icons/bs'
 import useSendMessage from '../../hooks/useSendMessage'
 import { set } from 'mongoose'
+import { useAuthContext } from '../../context/AuthContext'
 
 const MessageInput = () => {
+  const { authUser } = useAuthContext()
+  const convertObject = JSON.parse(authUser)
+
   const { loading, sendMessage } = useSendMessage()
   const [message, setMessage] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!message.trim()) return
-    await sendMessage(message)
+    await sendMessage(message, convertObject._id)
     setMessage('')
   }
   return (

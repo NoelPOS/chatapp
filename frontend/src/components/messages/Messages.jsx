@@ -5,6 +5,7 @@ import useGetMessages from '../../hooks/useGetMessages'
 
 const Messages = () => {
   const { loading, messages } = useGetMessages()
+
   return (
     <div className='px-20 flex-1 overflow-auto'>
       {!loading &&

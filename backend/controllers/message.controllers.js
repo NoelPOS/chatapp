@@ -3,9 +3,9 @@ import Message from '../models/Message.model.js'
 
 export const sendMessage = async (req, res) => {
   try {
-    const { message } = req.body
+    const { message, id: senderId } = req.body
     const { id: receiverId } = req.params
-    const senderId = req.user._id
+    // const senderId = req.user._id
 
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
@@ -39,7 +39,8 @@ export const sendMessage = async (req, res) => {
 export const getMessages = async (req, res) => {
   try {
     const { id: receiverId } = req.params
-    const senderId = req.user._id
+    const { id: senderId } = req.body
+    // const senderId = req.user._id
 
     const conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
@@ -50,7 +51,7 @@ export const getMessages = async (req, res) => {
     }
 
     const messages = conversation.messages
-
+    console.log('messages', messages)
     res.status(200).json(messages)
   } catch (err) {
     console.log('Error in getMessages controller: ', err.message)

@@ -16,7 +16,11 @@ const app = express()
 app.use(express.json())
 // for cookie passing
 app.use(cookieParser())
-app.use(cors())
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+  })
+)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
