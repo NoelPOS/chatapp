@@ -1,21 +1,32 @@
 import React from 'react'
+import useConversation from '../../zustand/useConversation'
+import { useAuthContext } from '../../context/AuthContext'
 
-const Message = () => {
+const Message = ({ message }) => {
+  const { authUser } = useAuthContext()
+  const { selectedConversation } = useConversation()
+  const fromMe = message.senderId === authUser._id
+  const chatClassName = fromMe ? 'chat-end' : 'chat-start'
+  const profilePic = fromMe
+    ? authUser.profilePic
+    : selectedConversation?.profilePic
+  const bubbleBgColor = fromMe ? 'bg-blue-500' : ''
+
   return (
-    <div className='flex flex-col items-end mb-4'>
-      <div className='flex items-end'>
-        <div className='order-2 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs'>
-          <div className='inline-block rounded-lg rounded-br-none bg-blue-500 px-4 py-2 text-white'>
-            Hello world
-          </div>
+    <div className={`chat ${chatClassName}`}>
+      <div className='chat-image avatar'>
+        <div className='w-10 rounded-full'>
+          <img alt='Tailwind CSS chat bubble component' src={profilePic} />
         </div>
-        <img
-          src='https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
-          alt='User avatar'
-          className='h-6 w-6 rounded-full order-1'
-        />
       </div>
-      <span className='text-xs text-gray-500 leading-none mt-1'>12:00 PM</span>
+      <div
+        className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}
+      >
+        {message.message}
+      </div>
+      {/* <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>
+        {formattedTime}
+      </div> */}
     </div>
   )
 }
