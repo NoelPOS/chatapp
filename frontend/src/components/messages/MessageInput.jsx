@@ -1,44 +1,54 @@
-import React, { useState } from 'react'
-import { BsSend } from 'react-icons/bs'
-import useSendMessage from '../../hooks/useSendMessage'
-import { set } from 'mongoose'
-import { useAuthContext } from '../../context/AuthContext'
+import { useState } from "react";
+import { BsSend } from "react-icons/bs";
+import useSendMessage from "../../hooks/useSendMessage";
 
 const MessageInput = () => {
-  const { authUser } = useAuthContext()
-  const convertObject = JSON.parse(authUser)
+	const [message, setMessage] = useState("");
+	const { loading, sendMessage } = useSendMessage();
 
-  const { loading, sendMessage } = useSendMessage()
-  const [message, setMessage] = useState('')
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!message) return;
+		await sendMessage(message);
+		setMessage("");
+	};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (!message.trim()) return
-    await sendMessage(message, convertObject._id)
-    setMessage('')
-  }
-  return (
-    <form
-      className='bg-gray-800 border-t border-gray-700 px-4 py-3'
-      onSubmit={handleSubmit}
-    >
-      <div className='max-w-4xl mx-auto flex items-center'>
-        <input
-          type='text'
-          className='flex-grow bg-gray-700 text-white border border-gray-600 rounded-l-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500'
-          placeholder='Type a message...'
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button
-          type='submit'
-          className='bg-blue-500 hover:bg-blue-600 text-white rounded-r-lg px-4 py-2 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500'
-        >
-          <BsSend className='w-5 h-5' />
-        </button>
-      </div>
-    </form>
-  )
-}
+	return (
+		<form className='px-4 my-3' onSubmit={handleSubmit}>
+			<div className='w-full relative'>
+				<input
+					type='text'
+					className='border text-sm rounded-lg block w-full p-2.5  bg-gray-700 border-gray-600 text-white'
+					placeholder='Send a message'
+					value={message}
+					onChange={(e) => setMessage(e.target.value)}
+				/>
+				<button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
+					{loading ? <div className='loading loading-spinner'></div> : <BsSend />}
+				</button>
+			</div>
+		</form>
+	);
+};
+export default MessageInput;
 
-export default MessageInput
+// STARTER CODE SNIPPET
+// import { BsSend } from "react-icons/bs";
+
+// const MessageInput = () => {
+// 	return (
+// 		<form className='px-4 my-3'>
+// 			<div className='w-full'>
+// 				<input
+// 					type='text'
+// 					className='border text-sm rounded-lg block w-full p-2.5  bg-gray-700 border-gray-600 text-white'
+// 					placeholder='Send a message'
+// 				/>
+// 				<button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
+// 					<BsSend />
+// 				</button>
+// 			</div>
+// 		</form>
+// 	);
+// };
+// export default MessageInput;
