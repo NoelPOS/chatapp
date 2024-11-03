@@ -54,7 +54,7 @@ const Home = () => {
       </div>
       <div className='flex-grow flex overflow-hidden'>
         <Sidebar />
-        <main className='flex-grow bg-gray-700 overflow-hidden'>
+        <main className='flex-grow bg-gray-700 overflow-y-scroll'>
           <MessageContainer />
         </main>
       </div>
