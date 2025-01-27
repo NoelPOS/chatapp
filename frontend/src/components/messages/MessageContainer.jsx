@@ -21,7 +21,9 @@ const MessageContainer = () => {
         <>
           {/* Header */}
           <div className='bg-slate-500 px-4 py-2 mb-2 '>
-            <span className='label-text text-white'>To:</span>{' '}
+            <span className='label-text text-white'>
+              To: {selectedConversation.username}
+            </span>{' '}
             <span className='text-white-900 font-bold'>
               {selectedConversation.fullName}
             </span>
